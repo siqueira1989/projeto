@@ -1,0 +1,297 @@
+<body>
+  <header class="mx-1 my-1">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">AgroTech</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Ação</a>
+                <a class="dropdown-item" href="#">Outra ação</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Algo mais aqui</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Desativado</a>
+            </li>
+          </ul>
+          <div class="my-2 my-lg-0">
+            <span> <?= $_SESSION['nome'] ?> </a></span>
+
+
+            <a class="btn btn-outline-danger mx-1 btn-sm" href="/sair" role="button">Sair</a>
+          </div>
+
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="my-1">
+    <div class="container-fluid p-1">
+      <div class="container-fluid">
+        <h4> Colaboradores</h4>
+
+        <!-- Alerta Bootstrap -->
+        <div id="jsAlertaDiv"></div>
+
+        <div id="conteudoDinamico"></div>
+        <div class="row">
+          <div class="col-12 col-md-9">
+            <div id="minhaDiv"></div>
+            <div class="input-group mb-3">
+              <!-- <input type="text" class="form-control" placeholder="Digite sua busca" aria-label="Digite sua busca" aria-describedby="button-addon">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon">Buscar</button>
+              </div>
+              !-->
+              <input type="text" class="mx-1" id="buscar" name="buscar" style="width: 100%;">
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#CadastroColaboradores">Cadastro</button>
+            <div class="modal fade" id="CadastroColaboradores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Formulário</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="formModal" action="/colaboradoresGerenciar" method="post">
+                      <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="senha">Senha:</label>
+                        <input type="password" class="form-control" id="senha" name="senha" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="funcao">Função:</label>
+                        <input type="text" class="form-control" name="funcao" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="funcao">Nivel:</label>
+                        <input type="text" class="form-control" name="nivel" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="data_admissao">Data de Admissão:</label>
+                        <input type="date" class="form-control" id="dataadmissao" name="dataadmissao" required>
+                        <input type="hidden" class="form-control" id="situacao" name="situacao" value="True">
+
+                      </div>
+                      <div class="modal-footer">
+                        <input type="hidden" class="form-control" name="acao" value="Cadastro">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-1">
+          <div class="col">
+            <div class="card">
+              <h5 class="card-header">Dados</h5>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table  table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Função</th>
+                        <th scope="col">Data Admissão</th>
+                        <th scope="col">Função</th>
+
+                        <th scope="col" colspan="3" style="width: 10%;">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabelaColaboradores">
+                      <?php foreach ($this->view->colaboradores as $indice => $colaboradores) { ?>
+                        <tr style="border:none">
+                          <th scope="row"><?= $colaboradores['id_colaboradores'] ?></th>
+                          <td><?= $colaboradores['nome_colaboradores'] ?></td>
+                          <td><?= $colaboradores['funcao_colaboradores'] ?></td>
+                          <td><?= date_create($colaboradores['dataadmissao_colaboradores'])->format('d/m/Y') ?></td>
+                          <td><?= $colaboradores['situacao_colaboradores'] ?></td>
+
+                          <td> 
+                            <button type="button" class="btn  btn-outline-warning " data-toggle="modal" 
+                            data-target="#ColaboradoresEditar<?= $colaboradores['id_colaboradores'] ?>"> Editar</button>
+                          </td>
+                          <div class="modal fade" id="ColaboradoresEditar<?= $colaboradores['id_colaboradores'] ?>" tabindex="-1" role="dialog" aria-labelledby="AtualizacaoColaboracao" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="AtualizacaoColaboracao">Atualização</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form id="formModal" action="/colaboradoresGerenciar" method="post">
+                                    <div class="form-group">
+                                      <label for="id">Id: <?= $colaboradores['id_colaboradores'] ?></label>
+                                      <input type="hidden" class="form-control" id="id" value="<?= $colaboradores['id_colaboradores'] ?>" name="id">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="nome">Nome:</label>
+                                      <input type="text" class="form-control" id="nome" value="<?= $colaboradores['nome_colaboradores'] ?>" name="nome" required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="senha">Senha:</label>
+                                      <input type="text" class="form-control" id="senha" value="<?= $colaboradores['senha_colaboradores'] ?>" name="senha" required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="funcao">Função:</label>
+                                      <input type="text" class="form-control" name="funcao" value="<?= $colaboradores['funcao_colaboradores'] ?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="data_admissao">Data de Admissão:</label>
+                                      <input type="date" class="form-control" id="dataadmissao" name="dataadmissao" value="<?= $colaboradores['dataadmissao_colaboradores'] ?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="Situacao">Data de Admissão:</label>
+                                      <input type="type" class="form-control" id="situacao" name="situacao" value="<?= $colaboradores['situacao_colaboradores'] ?>" required>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <input type="hidden" class="form-control" name="acao" value="Atualizar">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                      <button type="submit" class="btn  btn-warning">Atualizar</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#ExcluirColaboradores<?= $colaboradores['id_colaboradores'] ?>">Excluir
+                            </button>
+                          </td>
+                        </tr>
+                        <!--modal excluir-->
+                        <div class="modal fade" id="ExcluirColaboradores<?= $colaboradores['id_colaboradores'] ?>" tabindex="-1" role="dialog" aria-labelledby="ExcluirColaboradores2" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="ExcluirColaboradores2">Confirmar a Exclusão do Registro</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form method="post" action="/colaboradoresGerenciar">
+                                  <p>Deseja realmente deletar este registro?</p>
+                                  <input type="hidden" name="id_colaboradores" value="<?= $colaboradores['id_colaboradores'] ?>">
+                                  <input type="hidden" name="acao" value="Excluir">
+                                  <?= $colaboradores['nome_colaboradores'] ?>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-danger">Deletar</button>
+                              </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      <?php } ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <?php
+  // Verifica se o parâmetro 'mensagem' está presente na URL
+  $mensagem = isset($_GET['mensagem']) ? $_GET['mensagem'] : '';
+
+  // Use a função htmlspecialchars para escapar caracteres especiais na string PHP
+  $minhaStringDoPHP = htmlspecialchars($mensagem);
+  ?>
+  <script>
+    $(document).ready(function() {
+      $("#buscar").on("input", function() {
+        var value = $(this).val().toLowerCase();
+        $("#tabelaColaboradores tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().includes(value));
+        });
+      });
+      
+    });
+    function formatarDataBrasileira(data) {
+    const opcoes = { day: 'numeric', month: 'numeric', year: 'numeric' };
+    return new Intl.DateTimeFormat('pt-BR', opcoes).format(new Date(data));
+  }
+    var minhaStringDoPHP = "<?= $minhaStringDoPHP; ?>";
+
+function exibirAlertaJS() {
+  var jsAlertaDiv = document.getElementById("jsAlertaDiv");
+
+  if (minhaStringDoPHP.trim() !== "") {
+    // Verifique se a mensagem contém a classe "excluido"
+    var isExcluido = minhaStringDoPHP.includes("Excluido");
+    var isCadastro = minhaStringDoPHP.includes("Cadastro");
+    var isAtualizado = minhaStringDoPHP.includes("Atualizado");
+
+    // Crie um alerta em JS com base na presença da classe "excluido"
+    if (isExcluido) {
+      jsAlertaDiv.innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+        'Esta mensagem foi excluída.' +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>';
+    } else if (isCadastro) {
+      jsAlertaDiv.innerHTML = '<div class="alert alert-primary alert-dismissible fade show" role="alert">' +
+        minhaStringDoPHP +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>';
+    } else if (isAtualizado) {
+      jsAlertaDiv.innerHTML = '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
+        minhaStringDoPHP +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>';
+    } else {
+      jsAlertaDiv.innerHTML = '<div class="alert alert-light alert-dismissible fade show" role="alert">' +
+        minhaStringDoPHP +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>';
+    }
+  } else {
+    jsAlertaDiv.innerHTML = ''; // Limpe o conteúdo da div
+  }
+}
+window.onload = exibirAlertaJS;
+ 
+  </script>
