@@ -12,6 +12,7 @@ class Colaboradores extends Model {
 	private $funcao_colaboradores;
 	private $dataadmissao_colaboradores;
 	private $situacao_colaboradores;
+	private $nivel_colaboradores;
 
 	public function __get($atributo) {
 		return $this->$atributo;
@@ -28,13 +29,15 @@ class Colaboradores extends Model {
 			senha_colaboradores, 
 			funcao_colaboradores,
 			dataadmissao_colaboradores,
-			situacao_colaboradores
+			situacao_colaboradores,
+			nivel_colaboradores
 		) VALUES (
 			:nome_colaboradores, 
 			:senha_colaboradores,
 			:funcao_colaboradores, 
 			:dataadmissao_colaboradores,
-			:situacao_colaboradores)";
+			:situacao_colaboradores,
+			nivel_colaboradores;)";
 		
 
 		$stmt = $this->db->prepare($query);
@@ -43,6 +46,7 @@ class Colaboradores extends Model {
 		$stmt->bindValue(':funcao_colaboradores', $this->__get('funcao_colaboradores'));
 		$stmt->bindValue(':dataadmissao_colaboradores', $this->__get('dataadmissao_colaboradores'));
 		$stmt->bindValue(':situacao_colaboradores', $this->__get('situacao_colaboradores'));
+		$stmt->bindValue(':nivel_colaboradores', $this->__get('nivel_colaboradores'));
 		$stmt->execute();
 
 		return $this;
@@ -54,7 +58,8 @@ class Colaboradores extends Model {
             senha_colaboradores = :senha_colaboradores,
             funcao_colaboradores = :funcao_colaboradores,
             dataadmissao_colaboradores = :dataadmissao_colaboradores,
-            situacao_colaboradores = :situacao_colaboradores
+            situacao_colaboradores = :situacao_colaboradores,
+			nivel_colaboradores =: nivel_colaboradores'));
             WHERE id_colaboradores = :id_colaboradores";
 
         $stmt = $this->db->prepare($query);
@@ -64,6 +69,7 @@ class Colaboradores extends Model {
         $stmt->bindValue(':funcao_colaboradores', $this->__get('funcao_colaboradores'));
         $stmt->bindValue(':dataadmissao_colaboradores', $this->__get('dataadmissao_colaboradores'));
         $stmt->bindValue(':situacao_colaboradores', $this->__get('situacao_colaboradores'));
+		$stmt->bindValue(':nivel_colaboradores', $this->__get('nivel_colaboradores'));
         $stmt->execute();
 
         return $this;
@@ -81,7 +87,7 @@ class Colaboradores extends Model {
 			$valido = false;
 		}
 
-		if(strlen($this->__get('funcao_colaboradores')) < 3) {
+		if(strlen($this->__get('nivel_colaboradores')) < 3) {
 			$valido = false;
 		}
 
@@ -137,7 +143,7 @@ class Colaboradores extends Model {
 
 	public function acesso() {
 
-		$query = "select id_colaboradores,nome_colaboradores,senha_colaboradores, funcao_colaboradores from colaboradores where nome_colaboradores = :nome_colaboradores and senha_colaboradores = :senha_colaboradores";
+		$query = "select id_colaboradores,nome_colaboradores,senha_colaboradores, nivel_colaboradores from colaboradores where nome_colaboradores = :nome_colaboradores and senha_colaboradores = :senha_colaboradores";
 		$stmt = $this->db->prepare($query);
 		$stmt->bindValue(':nome_colaboradores', $this->__get('nome_colaboradores'));
 		$stmt->bindValue(':senha_colaboradores', $this->__get('senha_colaboradores'));
@@ -146,10 +152,10 @@ class Colaboradores extends Model {
 		$usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
 	
 
-	if( !empty($usuario['id_colaboradores']) &&  !empty($usuario['nome_colaboradores'])  && !empty($usuario['funcao_colaboradores'])) {
+	if( !empty($usuario['id_colaboradores']) &&  !empty($usuario['nome_colaboradores'])  && !empty($usuario['nivel_colaboradores'])) {
 			$this->__set('id_colaboradores', $usuario['id_colaboradores']);
 			$this->__set('nome_colaboradores', $usuario['nome_colaboradores']);
-			$this->__set('funcao_colaboradores', $usuario['funcao_colaboradores']);
+			$this->__set('nivel_colaboradores', $usuario['nivel_colaboradores']);
 		}
 
 		return $this;

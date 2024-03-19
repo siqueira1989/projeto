@@ -27,11 +27,13 @@ class AuthController extends Action {
 			$_SESSION['id'] = $usuario->__get('id_colaboradores');
 			$_SESSION['nome'] = $usuario->__get('nome_colaboradores');
 			$_SESSION['nivel'] = $usuario->__get('nivel_colaboradores');
+
 		 if( $usuario->__get('nivel_colaboradores') == 1){
 			header('Location: /admin');
 			
 		 } else{
-			header('Location: /colaborador');
+			echo('nome:'.$usuario->__get('nivel_colaboradores'));
+			
 		 }
 	} else{
 		header('Location: /login?mensagem=erro');

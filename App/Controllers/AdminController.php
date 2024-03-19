@@ -14,7 +14,6 @@ class AdminController extends Action
        
          $this->render('admin');
         
-     
     }
     /*Colaboradores*/
     public function colaboradores()
