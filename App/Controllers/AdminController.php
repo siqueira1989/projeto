@@ -39,6 +39,7 @@ class AdminController extends Action
                 $colaboradores->__set('funcao_colaboradores', $_POST['funcao']);
                 $colaboradores->__set('dataadmissao_colaboradores', $_POST['dataadmissao']);
                 $colaboradores->__set('situacao_colaboradores', $_POST['situacao']);
+                $colaboradores->__set('nivel_colaboradores', $_POST['situacao']);
                 $colaboradores-> salvarColaboradores();
                 $mensagem= "Cadastro Realizado com sucesso";
                 header('Location: /colaboradores?mensagem='.$mensagem);

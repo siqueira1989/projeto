@@ -1,121 +1,131 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
-        aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+      aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/Admin">Home <span class="sr-only">(página atual)</span></a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Categoria
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/Classificacao">Classificação</a>
-              <a class="dropdown-item" href="/Categoria">Categoria</a>
-              
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Colaboradores
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/Parceiros">Parceiros</a>
-              <a class="dropdown-item" href="/Colaboradores">Colaboradores</a>
-              
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Atividade Agricola
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/Talhao">Talhão</a>
-              <a class="dropdown-item" href="/Atividade">Atividade</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Financeiro
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/Romaneio">Romaneio</a>
-              <a class="dropdown-item" href="/Frete">Fretes</a>
-              <a class="dropdown-item" href="/ComissaoeTaxas">Comissão e Taxas</a>
-            </div>
-          </li>
-        </ul>
-        <div>
-          <span class="mr-2"><?=$_SESSION['nome']?></span>
-          <button type="button" class="btn  btn-outline-danger" id="btn-sair"><span>Sair</span></button>
-        </div>
+    <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/Admin">Home <span class="sr-only">(página atual)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Categoria
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/Classificacao">Classificação</a>
+            <a class="dropdown-item" href="/Categoria">Categoria</a>
+
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Colaboradores
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/Parceiros">Parceiros</a>
+            <a class="dropdown-item" href="/Colaboradores">Colaboradores</a>
+
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Atividade Agricola
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/Talhao">Talhão</a>
+            <a class="dropdown-item" href="/Atividade">Atividade</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Financeiro
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/Romaneio">Romaneio</a>
+            <a class="dropdown-item" href="/Frete">Fretes</a>
+            <a class="dropdown-item" href="/ComissaoeTaxas">Comissão e Taxas</a>
+          </div>
+        </li>
+      </ul>
+      <div>
+        <span class="mr-2">
+          <?= $_SESSION['nome'] ?>
+        </span>
+        <a class="btn btn-outline-danger mx-1 btn-sm" href="/sair" role="button">Sair</a>
       </div>
-    </nav>
-  </header>
-  <main class="main mt-2">
+    </div>
+  </nav>
+</header>
+<main class="main mt-2">
   <div class="container">
-            <div class="row" id="row1">
-                <div class="col-md-3 mb-4">
-                    <a href="/admin" class="btn btn-outline-primary  btn-lg btn-square btn-block"><i class="fa-solid fa-home"></i>Home</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="/colaboradores" class="btn btn-outline-secondary  btn-lg btn-square btn-block"><i class="fa-solid fa-users"></i>
-                        Colaboradores</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="#" class="btn btn-outline-success btn-lg btn-square btn-block"> <i class="fa-solid fa-check"></i>
-                        Romaneio</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="/admin" class="btn btn-outline-primary  btn-lg btn-square btn-block"><i class="fa-solid fa-home"></i>Home</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="/colaboradores" class="btn btn-outline-secondary  btn-lg btn-square btn-block"><i class="fa-solid fa-users"></i>
-                        Colaboradores</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="#" class="btn btn-outline-success btn-lg btn-square btn-block"> <i class="fa-solid fa-check"></i>
-                        Romaneio</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="/admin" class="btn btn-outline-primary  btn-lg btn-square btn-block"><i class="fa-solid fa-home"></i>Home</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="/colaboradores" class="btn btn-outline-secondary  btn-lg btn-square btn-block"><i class="fa-solid fa-users"></i>
-                        Colaboradores</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="#" class="btn btn-outline-success btn-lg btn-square btn-block"> <i class="fa-solid fa-check"></i>
-                        Romaneio</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="/admin" class="btn btn-outline-primary  btn-lg btn-square btn-block"><i class="fa-solid fa-home"></i>Home</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="/colaboradores" class="btn btn-outline-secondary  btn-lg btn-square btn-block"><i class="fa-solid fa-users"></i>
-                        Colaboradores</a>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <a href="#" class="btn btn-outline-success btn-lg btn-square btn-block"> <i class="fa-solid fa-check"></i>
-                        Romaneio</a>
-                </div>
-               
-            </div>
-        </div>
+    <div class="row" id="row1">
+      <div class="col-md-3 mb-4">
+        <a href="/admin" class="btn btn-outline-primary  btn-lg btn-square btn-block"><i
+            class="fa-solid fa-home"></i>Home</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="/colaboradores" class="btn btn-outline-secondary  btn-lg btn-square btn-block"><i
+            class="fa-solid fa-users"></i>
+          Colaboradores</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="#" class="btn btn-outline-success btn-lg btn-square btn-block"> <i class="fa-solid fa-check"></i>
+          Romaneio</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="/admin" class="btn btn-outline-primary  btn-lg btn-square btn-block"><i
+            class="fa-solid fa-home"></i>Home</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="/colaboradores" class="btn btn-outline-secondary  btn-lg btn-square btn-block"><i
+            class="fa-solid fa-users"></i>
+          Colaboradores</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="#" class="btn btn-outline-success btn-lg btn-square btn-block"> <i class="fa-solid fa-check"></i>
+          Romaneio</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="/admin" class="btn btn-outline-primary  btn-lg btn-square btn-block"><i
+            class="fa-solid fa-home"></i>Home</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="/colaboradores" class="btn btn-outline-secondary  btn-lg btn-square btn-block"><i
+            class="fa-solid fa-users"></i>
+          Colaboradores</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="#" class="btn btn-outline-success btn-lg btn-square btn-block"> <i class="fa-solid fa-check"></i>
+          Romaneio</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="/admin" class="btn btn-outline-primary  btn-lg btn-square btn-block"><i
+            class="fa-solid fa-home"></i>Home</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="/colaboradores" class="btn btn-outline-secondary  btn-lg btn-square btn-block"><i
+            class="fa-solid fa-users"></i>
+          Colaboradores</a>
+      </div>
+      <div class="col-md-3 mb-4">
+        <a href="#" class="btn btn-outline-success btn-lg btn-square btn-block"> <i class="fa-solid fa-check"></i>
+          Romaneio</a>
+      </div>
+
+    </div>
+  </div>
 </main>
 <!-- Footer -->
-<footer class="footer mt-auto py-3 bg-light">
-        <div class="container">
-            <span class="text-muted">© 2024 Luciano Aparecido de Siqueira. Todos os direitos reservados.</span>
-        </div>
-    </footer>
-    <!-- Fim do Footer -->
+<footer class="footer mt-3 py-3 bg-light">
+  <div class="container ">
+    <span class="text-muted">© 2024 Luciano Aparecido de Siqueira. Todos os direitos reservados.</span>
+  </div>
+</footer>
+<!-- Fim do Footer -->
