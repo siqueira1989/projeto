@@ -4,5 +4,5 @@ Create TABLE colaboradores(
      senha_colaboradores varchar(50), 
      funcao_colaboradores varchar(10), 
      dataadmissao_colaboradores date, 
-situacao_colaboradores boolean, 
+    situacao_colaboradores boolean, 
 nivel_colaboradores int);

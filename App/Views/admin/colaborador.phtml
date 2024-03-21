@@ -1,341 +1,383 @@
-<body>
-  <header class="mx-1 my-1">
-    <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">AgroTech</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<?php
+// No início da página, antes de qualquer outro código PHP, verifique se a variável de sessão 'mensagem' está definida e, se estiver, atribua seu valor a uma variável PHP local.
+$mensagem = isset($_SESSION['mensagem']) ? $_SESSION['mensagem'] : '';
 
-        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Ação</a>
-                <a class="dropdown-item" href="#">Outra ação</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Algo mais aqui</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Desativado</a>
-            </li>
-          </ul>
-          <div class="my-2 my-lg-0">
-            <span> <?= $_SESSION['nome'] ?> </a></span>
-            <a class="btn btn-outline-danger mx-1 btn-sm" href="/sair" role="button">Sair</a>
-          </div>
 
+unset($_SESSION['mensagem']);
+?>
+
+<header class="mx-1 my-1">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">AgroTech</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Ação</a>
+              <a class="dropdown-item" href="#">Outra ação</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Algo mais aqui</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Desativado</a>
+          </li>
+        </ul>
+        <div class="my-2 my-lg-0">
+          <span> <?= $_SESSION['nome'] ?> </a></span>
+          <a class="btn btn-outline-danger mx-1 btn-sm" href="/sair" role="button">Sair</a>
         </div>
-      </nav>
-    </div>
-  </header>
-  <main class="my-1">
-    <div class="container-fluid p-1">
-      <div class="container-fluid">
-        <h4> Colaboradores</h4>
 
-        <!-- Alerta Bootstrap -->
-        <div id="jsAlertaDiv"></div>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- corpo -->
+<main class="my-1">
+  <div class="container-fluid p-1">
+    <div class="container-fluid">
+      <h4 style="border-bottom: 2px solid;"> Colaboradores</h4>
 
-        <div id="conteudoDinamico"></div>
-        <div class="row">
-          <div class="col-12 col-md-9">
-            <div id="minhaDiv"></div>
-            <div class="input-group mb-3">
-              <!-- <input type="text" class="form-control" placeholder="Digite sua busca" aria-label="Digite sua busca" aria-describedby="button-addon">
+      <!-- Alerta Bootstrap -->
+      <div id="jsAlertaDiv">
+        <?php if (!empty($mensagem)) : ?>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= $mensagem ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <?php endif; ?>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-9">
+
+
+          <!-- Em seguida, insira este código HTML/PHP onde deseja exibir o alerta na página: -->
+
+
+          <div class="input-group">
+            <!-- <input type="text" class="form-control" placeholder="Digite sua busca" aria-label="Digite sua busca" aria-describedby="button-addon">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon">Buscar</button>
               </div>
               !-->
-              <input type="text" class="mx-1" id="buscar" name="buscar" style="width: 100%;">
+            <input type="text" class="" id="buscar" name="buscar" style="width: 100%;">
+          </div>
+        </div>
+        <div class="col-12 col-md-3 mb-1">
+          <button type="button" class="btn btn-primary btn-block py-1" data-toggle="modal" data-target="#CadastroColaboradores">Cadastro</button>
+          <div class="modal fade" id="CadastroColaboradores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Formulário</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="formModal" action="/colaboradoresGerenciar" method="post">
+                    <div class="form-group">
+                      <label for="nome">Nome:</label>
+                      <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="senha">Senha:</label>
+                      <input type="password" class="form-control" id="senha" name="senha" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="funcao">Função:</label>
+                      <input type="text" class="form-control" name="funcao" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="data_admissao">Data de Admissão:</label>
+                      <input type="date" class="form-control" id="dataadmissao" name="dataadmissao" required>
+                      <input type="hidden" class="form-control" id="situacao" name="situacao" value="true">
+                    </div>
+                    <div class="form-group">
+                      <label for="Nivel">Nivel:</label>
+                      <select id="nivel" name="nivel" class="form-control">
+                        <?php
+                        $nivels = array(
+                          array('id' => 1, 'nome' => 'Diretoria'),
+                          array('id' => 2, 'nome' => 'Colaboradores'),
+                        );
+                        // ID da cidade que você deseja selecionar
+
+                        foreach ($nivels as $opcao) {
+                          // Verifica se a cidade atual é a selecionada e adiciona a tag "selected" se for
+
+                          echo "<option value='" . $opcao['id'] . "' $selected>" . $opcao['nome'] . "</option>";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    <div class="modal-footer">
+                      <input type="hidden" class="form-control" name="acao" value="Cadastro">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                      <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-12 col-md-3">
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#CadastroColaboradores">Cadastro</button>
-            <div class="modal fade" id="CadastroColaboradores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Formulário</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form id="formModal" action="/colaboradoresGerenciar" method="post">
-                      <div class="form-group">
-                        <label for="nome">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required>
+        </div>
+      </div>
+
+      <div class="row my-1">
+        <div class="col">
+          <div class="card">
+            <h5 class="card-header">Dados</h5>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table  table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Código</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Função</th>
+                      <th scope="col">Data Admissão</th>
+                      <th scope="col">Situção</th>
+                      <th scope="col">Nivel</th>
+
+                      <th scope="col" colspan="3" style="width: 10%;">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabelaColaboradores">
+                    <?php foreach ($this->view->colaboradores as $indice => $colaboradores) { ?>
+                      <tr style="border:none">
+                        <th scope="row"><?= $colaboradores['id_colaboradores'] ?></th>
+                        <td><?= $colaboradores['nome_colaboradores'] ?></td>
+                        <td><?= $colaboradores['funcao_colaboradores'] ?></td>
+                        <td><?= date_create($colaboradores['dataadmissao_colaboradores'])->format('d/m/Y') ?></td>
+                        <td> <?php
+                              // Verifica se situacao_colaboradores é igual a 1
+                              if ($colaboradores['situacao_colaboradores'] == 1) {
+                                echo "Ativo";
+                              } else {
+                                // Caso contrário, exibe o valor de situacao_colaboradores normalmente
+                                echo "Desativo";
+                              }
+                              ?></td>
+                        <td><?= $colaboradores['nivel_colaboradores'] ?></td>
+
+                        <td>
+                          <button type="button" class="btn  btn-outline-warning " data-toggle="modal" data-target="#ColaboradoresEditar<?= $colaboradores['id_colaboradores'] ?>"> Editar</button>
+                        </td>
+                        <div class="modal fade" id="ColaboradoresEditar<?= $colaboradores['id_colaboradores'] ?>" tabindex="-1" role="dialog" aria-labelledby="AtualizacaoColaboracao" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="AtualizacaoColaboracao">Atualização</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form id="formModal" action="/colaboradoresGerenciar" method="post">
+                                  <div class="form-group">
+                                    <label for="id">Id: </label>
+                                    <p style='padding-right: 10px;' ;><?= $colaboradores['id_colaboradores']  ?></>
+                                      <input type="hidden" class="form-control" id="id" value="<?= $colaboradores['id_colaboradores'] ?>" name="id">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="nome">Nome:</label>
+                                    <input type="text" class="form-control w-100" id="nome" value="<?= $colaboradores['nome_colaboradores'] ?>" name="nome" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="senha">Função:</label>
+                                    <input type="text" class="form-control" id="senha" value="<?= $colaboradores['funcao_colaboradores'] ?>" name="funcao" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="senha">Senha:</label>
+                                    <input type="text" class="form-control" id="senha" value="<?= $colaboradores['senha_colaboradores'] ?>" name="senha" required>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label for="data_admissao">Data de Admissão:</label>
+                                    <input type="date" class="form-control" id="dataadmissao" name="dataadmissao" value="<?= $colaboradores['dataadmissao_colaboradores'] ?>" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="Situacao">Situação:</label>
+                                    <select id="situacao" name="situacao" class="form-control">
+                                      <?php
+                                      $situacaos = array(
+                                        array('id' => 1, 'nome' => 'Ativo 1'),
+                                        array('id' => 0, 'nome' => 'Desativo 0'),
+                                      );
+                                      $opcao_selecionada = $colaboradores['situacao_colaboradores'];
+                                      foreach ($situacaos as $opcao) {
+                                        $selected = ($opcao['id'] == $opcao_selecionada) ? 'selected' : '';
+
+                                        echo "<option  value='" . $opcao['id'] . "' $selected>" . $opcao['nome'] . "</option>";
+                                      }
+                                      ?>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="Nivel">Nivel:</label>
+                                    <select id="nivel" name="nivel" class="form-control">
+                                      <?php
+                                      $nivels = array(
+                                        array('id' => 1, 'nome' => 'Administrador'),
+                                        array('id' => 2, 'nome' => 'Colaborador'),
+                                      );
+                                      $opcao_selecionada = $colaboradores['nivel_colaboradores'];
+                                      foreach ($nivels as $opcao) {
+                                        $selected = ($opcao['id'] == $opcao_selecionada) ? 'selected' : '';
+                                        echo "<option value='" . $opcao['id'] . "' $selected>" . $opcao['nome'] . "</option>";
+                                      }
+                                      ?>
+                                    </select>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <input type="hidden" class="form-control" name="acao" value="Atualizar">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn  btn-warning">Atualizar</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="form-group">
-                        <label for="senha">Senha:</label>
-                        <input type="password" class="form-control" id="senha" name="senha" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="funcao">Função:</label>
-                        <input type="text" class="form-control" name="funcao" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="funcao">Nivel:</label>
-                        <input type="text" class="form-control" name="nivel" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="data_admissao">Data de Admissão:</label>
-                        <input type="date" class="form-control" id="dataadmissao" name="dataadmissao" required>
-                        <input type="hidden" class="form-control" id="situacao" name="situacao" value="True">
-                      </div>
-                      <div class="form-group">
-                                      <label for="Nivel">Nivel:</label>
-                                      <select id="nivel" name="nivel" class="form-control">
-                                        <?php
-                                        $nivels = array(
-                                          array('id' => 1, 'nome' => 'Diretoria'),
-                                          array('id' => 2, 'nome' => 'Colaboradores'),
-                                        );
-                                        // ID da cidade que você deseja selecionar
-                                       
-                                        foreach ($nivels as $opcao) {
-                                          // Verifica se a cidade atual é a selecionada e adiciona a tag "selected" se for
-                                          
-                                          echo "<option value='" . $opcao['id'] . "' $selected>" . $opcao['nome'] . "</option>";
-                                        }
-                                        ?>
-                                      </select>
-                                    </div>
-                      <div class="modal-footer">
-                        <input type="hidden" class="form-control" name="acao" value="Cadastro">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                      </div>
+              <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#ExcluirColaboradores<?= $colaboradores['id_colaboradores'] ?>">Excluir
+                </button>
+              </td>
+              </tr>
+              <!--modal excluir-->
+              <div class="modal fade" id="ExcluirColaboradores<?= $colaboradores['id_colaboradores'] ?>" tabindex="-1" role="dialog" aria-labelledby="ExcluirColaboradores2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="ExcluirColaboradores2">Confirmar a Exclusão do Registro</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="post" action="/colaboradoresGerenciar">
+                        <p>Deseja realmente deletar este registro?</p>
+                        <input type="hidden" name="id_colaboradores" value="<?= $colaboradores['id_colaboradores'] ?>">
+                        <input type="hidden" name="acao" value="Excluir">
+                        <?= $colaboradores['nome_colaboradores'] ?>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-danger">Deletar</button>
+                    </div>
                     </form>
                   </div>
                 </div>
               </div>
+            <?php } ?>
+            </tbody>
+            </table>
             </div>
           </div>
         </div>
-
-        <div class="row my-1">
-          <div class="col">
-            <div class="card">
-              <h5 class="card-header">Dados</h5>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table  table-bordered">
-                    <thead>
-                      <tr>
-                        <th scope="col">Código</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Função</th>
-                        <th scope="col">Data Admissão</th>
-                        <th scope="col">Função</th>
-
-                        <th scope="col" colspan="3" style="width: 10%;">Ações</th>
-                      </tr>
-                    </thead>
-                    <tbody id="tabelaColaboradores">
-                      <?php foreach ($this->view->colaboradores as $indice => $colaboradores) { ?>
-                        <tr style="border:none">
-                          <th scope="row"><?= $colaboradores['id_colaboradores'] ?></th>
-                          <td><?= $colaboradores['nome_colaboradores'] ?></td>
-                          <td><?= $colaboradores['funcao_colaboradores'] ?></td>
-                          <td><?= date_create($colaboradores['dataadmissao_colaboradores'])->format('d/m/Y') ?></td>
-                          <td><?= $colaboradores['situacao_colaboradores'] ?></td>
-
-                          <td>
-                            <button type="button" class="btn  btn-outline-warning " data-toggle="modal" data-target="#ColaboradoresEditar<?= $colaboradores['id_colaboradores'] ?>"> Editar</button>
-                          </td>
-                          <div class="modal fade" id="ColaboradoresEditar<?= $colaboradores['id_colaboradores'] ?>" tabindex="-1" role="dialog" aria-labelledby="AtualizacaoColaboracao" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="AtualizacaoColaboracao">Atualização</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form id="formModal" action="/colaboradoresGerenciar" method="post">
-                                    <div class="form-group">
-                                      <label for="id">Id: </label>
-                                      <p style='padding-right: 10px;' ;><?= $colaboradores['id_colaboradores']  ?></>
-                                        <input type="hidden" class="form-control" id="id" value="<?= $colaboradores['id_colaboradores'] ?>" name="id">
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="nome">Nome:</label>
-                                      <input type="text" class="form-control w-100" id="nome" value="<?= $colaboradores['nome_colaboradores'] ?>" name="nome" required>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="senha">Senha:</label>
-                                      <input type="text" class="form-control" id="senha" value="<?= $colaboradores['senha_colaboradores'] ?>" name="senha" required>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="funcao">Função:</label>
-                                      <input type="text" class="form-control" name="funcao" value="<?= $colaboradores['funcao_colaboradores'] ?>" required>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="data_admissao">Data de Admissão:</label>
-                                      <input type="date" class="form-control" id="dataadmissao" name="dataadmissao" value="<?= $colaboradores['dataadmissao_colaboradores'] ?>" required>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="Situacao">Situação:</label>
-                                      <input type="type" class="form-control" id="situacao" name="situacao" value="<?= $colaboradores['situacao_colaboradores'] ?>" required>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="Nivel">Nivel:</label>
-                                      <select id="nivel" name="nivel" class="form-control">
-                                        <?php
-                                        $nivels = array(
-                                          array('id' => 1, 'nome' => 'Diretoria'),
-                                          array('id' => 2, 'nome' => 'Colaboradores'),
-                                        );
-                                        // ID da cidade que você deseja selecionar
-                                        $opcao_selecionada = $colaboradores['situacao_colaboradores']; // Por exemplo, selecionando Rio de Janeiro
-
-                                        // Itera sobre os dados das cidades para criar as opções do select
-                                        foreach ($nivels as $opcao) {
-                                          // Verifica se a cidade atual é a selecionada e adiciona a tag "selected" se for
-                                          $selected = ($opcao['id'] == $opcao_selecionada) ? 'selected' : '';
-                                          echo "<option value='" . $opcao['id'] . "' $selected>" . $opcao['nome'] . "</option>";
-                                        }
-                                        ?>
-                                      </select>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <input type="hidden" class="form-control" name="acao" value="Atualizar">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                      <button type="submit" class="btn  btn-warning">Atualizar</button>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                </div>
-
-
-                <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#ExcluirColaboradores<?= $colaboradores['id_colaboradores'] ?>">Excluir
-                  </button>
-                </td>
-                </tr>
-                <!--modal excluir-->
-                <div class="modal fade" id="ExcluirColaboradores<?= $colaboradores['id_colaboradores'] ?>" tabindex="-1" role="dialog" aria-labelledby="ExcluirColaboradores2" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="ExcluirColaboradores2">Confirmar a Exclusão do Registro</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <form method="post" action="/colaboradoresGerenciar">
-                          <p>Deseja realmente deletar este registro?</p>
-                          <input type="hidden" name="id_colaboradores" value="<?= $colaboradores['id_colaboradores'] ?>">
-                          <input type="hidden" name="acao" value="Excluir">
-                          <?= $colaboradores['nome_colaboradores'] ?>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-danger">Deletar</button>
-                      </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              <?php } ?>
-              </tbody>
-              </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
-    </div>
-    </div>
-  </main>
-  <?php
-  // Verifica se o parâmetro 'mensagem' está presente na URL
-  $mensagem = isset($_GET['mensagem']) ? $_GET['mensagem'] : '';
 
-  // Use a função htmlspecialchars para escapar caracteres especiais na string PHP
-  $minhaStringDoPHP = htmlspecialchars($mensagem);
-  ?>
-  <script>
-    $(document).ready(function() {
-      $("#buscar").on("input", function() {
-        var value = $(this).val().toLowerCase();
-        $("#tabelaColaboradores tr").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().includes(value));
-        });
+    </div>
+  </div>
+  </div>
+</main>
+<!-- Footer -->
+<footer class="footer mt-3 py-3 bg-light">
+  <div class="container ">
+    <span class="text-muted">© 2024 Luciano Aparecido de Siqueira. Todos os direitos reservados.</span>
+  </div>
+</footer>
+<!-- Fim do Footer -->
+<script>
+
+  $(document).ready(function() {
+    $(document).on("input", "#buscar", function() {
+      var value = $(this).val().toLowerCase();
+      $("#tabelaColaboradores tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
       });
-
     });
+  });
 
-    function formatarDataBrasileira(data) {
-      const opcoes = {
-        day: 'numeric',
-        month: 'numeric',
-        year: 'numeric'
-      };
-      return new Intl.DateTimeFormat('pt-BR', opcoes).format(new Date(data));
+  function formatarDataBrasileira(data) {
+    const opcoes = {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric'
+    };
+    return new Intl.DateTimeFormat('pt-BR', opcoes).format(new Date(data));
+  }
+  // Função para mostrar o alerta de sucesso ou erro
+  function mostrarAlerta(mensagem, tipo) {
+    var alertaDiv = $('#jsAlertaDiv');
+    var alertaHtml = `
+            <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+                ${mensagem}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        `;
+    alertaDiv.html(alertaHtml);
+  }
+  // Código jQuery para manipular o evento de clique nos botões de Excluir
+  $('.btn-excluir').click(function() {
+    var nomeColaborador = $(this).data('nome');
+    var idColaborador = $(this).data('id');
+
+    if (confirm('Deseja realmente excluir o colaborador ' + nomeColaborador + '?')) {
+      // Envie uma requisição AJAX para excluir o colaborador com o ID especificado
+      $.post('/colaboradoresGerenciar', {
+          acao: 'Excluir',
+          id_colaboradores: idColaborador
+        })
+        .done(function(response) {
+          // Se a exclusão for bem-sucedida, mostre um alerta de sucesso
+          mostrarAlerta(response.mensagem, 'danger'); // Mudança aqui para alerta vermelho
+        })
+        .fail(function() {
+          // Se houver um erro, mostre um alerta de erro
+          mostrarAlerta('Ocorreu um erro ao excluir o colaborador.', 'danger');
+        });
     }
-    var minhaStringDoPHP = "<?= $minhaStringDoPHP; ?>";
+  });
 
-    function exibirAlertaJS() {
-      var jsAlertaDiv = document.getElementById("jsAlertaDiv");
+  // Código jQuery para manipular o evento de clique nos botões de Atualizar
+  $('.btn-atualizar').click(function() {
+    var idColaborador = $(this).data('id');
 
-      if (minhaStringDoPHP.trim() !== "") {
-        // Verifique se a mensagem contém a classe "excluido"
-        var isExcluido = minhaStringDoPHP.includes("Excluido");
-        var isCadastro = minhaStringDoPHP.includes("Cadastro");
-        var isAtualizado = minhaStringDoPHP.includes("Atualizado");
-
-        // Crie um alerta em JS com base na presença da classe "excluido"
-        if (isExcluido) {
-          jsAlertaDiv.innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-            'Esta mensagem foi excluída.' +
-            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-            '<span aria-hidden="true">&times;</span>' +
-            '</button>' +
-            '</div>';
-        } else if (isCadastro) {
-          jsAlertaDiv.innerHTML = '<div class="alert alert-primary alert-dismissible fade show" role="alert">' +
-            minhaStringDoPHP +
-            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-            '<span aria-hidden="true">&times;</span>' +
-            '</button>' +
-            '</div>';
-        } else if (isAtualizado) {
-          jsAlertaDiv.innerHTML = '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-            minhaStringDoPHP +
-            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-            '<span aria-hidden="true">&times;</span>' +
-            '</button>' +
-            '</div>';
-        } else {
-          jsAlertaDiv.innerHTML = '<div class="alert alert-light alert-dismissible fade show" role="alert">' +
-            minhaStringDoPHP +
-            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-            '<span aria-hidden="true">&times;</span>' +
-            '</button>' +
-            '</div>';
-        }
-      } else {
-        jsAlertaDiv.innerHTML = ''; // Limpe o conteúdo da div
-      }
-    }
-    window.onload = exibirAlertaJS;
-  </script>
+    // Envie uma requisição AJAX para obter os detalhes do colaborador com o ID especificado
+    $.post('/colaboradoresGerenciar', {
+        acao: 'Detalhes',
+        id_colaboradores: idColaborador
+      })
+      .done(function(response) {
+        // Exiba um modal com o formulário preenchido com os detalhes do colaborador
+        $('#modalAtualizar').html(response);
+        $('#modalAtualizar').modal('show');
+      })
+      .fail(function() {
+        // Se houver um erro, mostre um alerta de erro
+        mostrarAlerta('Ocorreu um erro ao carregar os detalhes do colaborador.', 'danger');
+      });
+  });
+</script>

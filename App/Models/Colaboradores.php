@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use MF\Model\Model;
+use mysqli_sql_exception;
 
 class Colaboradores extends Model {
 
@@ -37,7 +38,7 @@ class Colaboradores extends Model {
 			:funcao_colaboradores, 
 			:dataadmissao_colaboradores,
 			:situacao_colaboradores,
-			nivel_colaboradores;)";
+			:nivel_colaboradores)";
 		
 
 		$stmt = $this->db->prepare($query);
@@ -53,27 +54,37 @@ class Colaboradores extends Model {
 	}
 	   // Atualizar
 	   public function AtualizacaoColaboradores() {
-        $query = "UPDATE colaboradores SET 
-            nome_colaboradores = :nome_colaboradores,
-            senha_colaboradores = :senha_colaboradores,
-            funcao_colaboradores = :funcao_colaboradores,
-            dataadmissao_colaboradores = :dataadmissao_colaboradores,
-            situacao_colaboradores = :situacao_colaboradores,
-			nivel_colaboradores =: nivel_colaboradores'));
-            WHERE id_colaboradores = :id_colaboradores";
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':id_colaboradores', $this->__get('id_colaboradores'));
-        $stmt->bindValue(':nome_colaboradores', $this->__get('nome_colaboradores'));
-        $stmt->bindValue(':senha_colaboradores', $this->__get('senha_colaboradores'));
-        $stmt->bindValue(':funcao_colaboradores', $this->__get('funcao_colaboradores'));
-        $stmt->bindValue(':dataadmissao_colaboradores', $this->__get('dataadmissao_colaboradores'));
-        $stmt->bindValue(':situacao_colaboradores', $this->__get('situacao_colaboradores'));
-		$stmt->bindValue(':nivel_colaboradores', $this->__get('nivel_colaboradores'));
-        $stmt->execute();
-
-        return $this;
-    }
+		try{
+		$query = "UPDATE colaboradores SET 
+			nome_colaboradores = :nome_colaboradores,
+			senha_colaboradores = :senha_colaboradores,
+			funcao_colaboradores = :funcao_colaboradores,
+			dataadmissao_colaboradores = :dataadmissao_colaboradores,
+			situacao_colaboradores = :situacao_colaboradores,
+			nivel_colaboradores = :nivel_colaboradores
+			WHERE id_colaboradores = :id_colaboradores";
+	
+	
+		 $nivel=$this->__get('nivel_colaboradores');
+		 $situacao=$this->__get('situacao_colaboradores');
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':nome_colaboradores', $this->__get('nome_colaboradores'));
+		$stmt->bindValue(':senha_colaboradores', $this->__get('senha_colaboradores'));
+		$stmt->bindValue(':funcao_colaboradores', $this->__get('funcao_colaboradores'));
+		$stmt->bindValue(':dataadmissao_colaboradores', $this->__get('dataadmissao_colaboradores'));
+		$stmt->bindValue(':situacao_colaboradores', $situacao);
+		$stmt->bindValue(':nivel_colaboradores', $nivel);
+		$stmt->bindValue(':id_colaboradores', $this->__get('id_colaboradores'));
+		$stmt->execute();
+		return $this;
+		}catch (mysqli_sql_exception $e) {
+			// Tratar o erro, exibir mensagem, fazer log, etc.
+			echo "Erro ao executar a consulta SQL: " . $e->getMessage();
+			// Ou você pode lançar a exceção para que ela seja tratada no controlador
+			// throw $e;
+		}
+	}
+	
 
 	//validar se um cadastro pode ser feito
 	public function validarCadastro() {
