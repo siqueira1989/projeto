@@ -1,5 +1,7 @@
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body>
+  
+
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="/admin">Agrotechplus</a>
@@ -171,41 +173,35 @@
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Conteudo -->
-      <?php if ($this->view->mensagem == 'ok') { ?>
+      <?php
+// Defina uma variável para armazenar o tipo de alerta
+$tipoAlerta = '';
 
-         <div class="alert alert-primary alert-dismissible fade show mx-auto my-auto" role="alert">
-          Cadastro Realizado com Sucesso!
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+// Defina a classe do alerta com base na operação realizada
+if ($this->view->mensagem == 'ok') {
+    $tipoAlerta = 'alert-success'; // Cadastro com sucesso (verde)
+} else if ($this->view->mensagem == 'Atualizado') {
+    $tipoAlerta = 'alert-warning'; // Atualização com sucesso (amarelo)
+} else if ($this->view->mensagem == 'excluido') {
+    $tipoAlerta = 'alert-danger'; // Exclusão com sucesso (vermelho)
+} else if ($this->view->mensagem == '') {
+    // Mensagem vazia
+} else {
+    $tipoAlerta = 'alert-danger'; // Mensagem de erro (vermelho) - padrão
+}
+?>
+
+<!-- Aqui você pode utilizar a variável $tipoAlerta para definir a classe do alerta -->
+<?php if (!empty($this->view->mensagem) && $tipoAlerta !== '') : ?>
+    <div class="alert <?= $tipoAlerta ?> alert-dismissible fade show mx-auto my-auto" role="alert">
+        <!-- Conteúdo do alerta -->
+        <?= $this->view->mensagem ?>
+        <!-- Botão para fechar o alerta -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button>
-         </div>
-
-
-      <?php } else if ($this->view->mensagem == 'Atualizado') { ?>
-        <div class="alert alert-success alert-dismissible fade show mx-auto my-auto " role="alert">
-          Atualizado com Sucesso!
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <?php } else if ($this->view->mensagem == 'excluido') { ?>
-        <div class="alert  alert-danger alert-dismissible fade show" role="alert">
-          Excluido com Sucesso.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-      <?php } else if ($this->view->mensagem == '') {  ?>
-
-      <?php  } else { ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          Erro!
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <?php  } ?>
+        </button>
+    </div>
+<?php endif; ?>
 
       <div class="row">
         <div class="col-12">

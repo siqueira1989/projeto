@@ -50,33 +50,49 @@ unset($_SESSION['mensagem']);
 <main class="my-1">
   <div class="container-fluid p-1">
     <div class="container-fluid">
-      <h4 style="border-bottom: 2px solid;"> Colaboradores</h4>
+      <h4 style="border-bottom: 1px solid;"> Colaboradores</h4>
 
       <!-- Alerta Bootstrap -->
       <div id="jsAlertaDiv">
-        <?php if (!empty($mensagem)) : ?>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <?= $mensagem ?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        <?php endif; ?>
+        <?php if (!empty($mensagem)) {
+          if ($mensagem == "Colaborador cadastro com sucesso!") { ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= $mensagem ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php }
+          if ($mensagem == "Colaborador atualizado com sucesso!") { ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <?= $mensagem ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php } 
+          if ($mensagem == "Excluido  com sucesso") { ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= $mensagem ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php } if ($mensagem == "Não pode excluir próprio dados") { ?>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <?= $mensagem ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php } ?>
+
+        <?php } ?>
       </div>
 
       <div class="row">
         <div class="col-12 col-md-9">
-
-
-          <!-- Em seguida, insira este código HTML/PHP onde deseja exibir o alerta na página: -->
-
-
           <div class="input-group">
-            <!-- <input type="text" class="form-control" placeholder="Digite sua busca" aria-label="Digite sua busca" aria-describedby="button-addon">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon">Buscar</button>
-              </div>
-              !-->
             <input type="text" class="" id="buscar" name="buscar" style="width: 100%;">
           </div>
         </div>
@@ -141,7 +157,6 @@ unset($_SESSION['mensagem']);
           </div>
         </div>
       </div>
-
       <div class="row my-1">
         <div class="col">
           <div class="card">
@@ -258,7 +273,7 @@ unset($_SESSION['mensagem']);
                             </div>
                           </div>
                         </div>
-                      </div>
+              </div>
               <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#ExcluirColaboradores<?= $colaboradores['id_colaboradores'] ?>">Excluir
                 </button>
               </td>
@@ -308,12 +323,11 @@ unset($_SESSION['mensagem']);
 </footer>
 <!-- Fim do Footer -->
 <script>
-
   $(document).ready(function() {
     $(document).on("input", "#buscar", function() {
       var value = $(this).val().toLowerCase();
-      $("#tabelaColaboradores tbody tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      $("#tabelaColaboradores tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().includes(value));
       });
     });
   });

@@ -60,7 +60,7 @@ class AdminController extends Action
             } else {
                 $colaboradores->__set('id_colaboradores', $id);
                 $colaboradores->DeletarColaboradores();
-                $_SESSION['mensagem'] = "Colaborador excluído com sucesso!";
+                $_SESSION['mensagem'] = "Excluido com sucesso!";
                 echo json_encode(['mensagem' => $_SESSION['mensagem']]);
                 header('Location: /colaboradores');
                 exit();
@@ -70,7 +70,7 @@ class AdminController extends Action
             $colaboradores = Container::getModel('Colaboradores');
             $id = $_POST['id'];
             if ($_SESSION["id"] == $id) {
-                $_SESSION['mensagem'] = "Ação realizada com sucesso"; // Substitua "Ação realizada com sucesso" pela mensagem desejada
+                $_SESSION['mensagem'] = "Não pode excluir próprio dados"; // Substitua "Ação realizada com sucesso" pela mensagem desejada
                 header('Location: /colaboradores');
             } else { 
                
